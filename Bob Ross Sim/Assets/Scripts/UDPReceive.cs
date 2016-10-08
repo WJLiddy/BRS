@@ -17,12 +17,12 @@ public class UDPReceive : MonoBehaviour
     UdpClient client;
 
     // X Y Z P R Y
-    double[,] pos = new double[4,2];
+    public double[,] pos = new double[4,2];
 
     // R G B
-    int[,] col = new int[4, 3];
+    public int[,] col = new int[4, 3];
 
-    int[] is_painting = new int[4];
+    public int[] is_painting = new int[4];
 
 
     public int port; // define > init
@@ -118,6 +118,7 @@ public class UDPReceive : MonoBehaviour
 
                 is_painting[id] = BitConverter.ToInt32(data, colindex + (3 * 4));
 
+                //slow, casuing errors?
                // Debug.Log("From" + id+ "X " + pos[id, 0] + " Y " + pos[id, 1]+ "C " + col[id, 0] + " M " + col[id, 1] + " Y " + col[id, 2] + "Pnt? " + is_painting[id]);
 
             }
