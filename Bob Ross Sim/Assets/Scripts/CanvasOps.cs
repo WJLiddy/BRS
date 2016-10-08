@@ -7,7 +7,7 @@ public class CanvasOps : MonoBehaviour
 
     void Start()
     {
-        texture = LoadPNG(Application.dataPath + "/base.png");
+        texture = LoadPNG(Application.dataPath + "/misc_materials/base.png");
 
         GetComponent<Renderer>().material.mainTexture = texture;
         r = new System.Random();
@@ -19,7 +19,7 @@ public class CanvasOps : MonoBehaviour
         {
             for (int x = 0; x < texture.width; x++)
             {
-                if(r.NextDouble() < 0.01)
+                if(r.NextDouble() < 0.0001)
                     texture.SetPixel(x, y, new Color((float)r.NextDouble(), (float)r.NextDouble(), (float)r.NextDouble(), 0));
             }
         }

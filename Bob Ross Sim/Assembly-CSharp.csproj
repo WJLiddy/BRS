@@ -45,9 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CanvasOps.cs" />
-     <Compile Include="Assets\Plane.cs" />
-     <Compile Include="Assets\UDPReceive.cs" />
+     <Compile Include="Assets\Scripts\CanvasOps.cs" />
+     <Compile Include="Assets\Scripts\Plane.cs" />
+     <Compile Include="Assets\Scripts\UDPReceive.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
