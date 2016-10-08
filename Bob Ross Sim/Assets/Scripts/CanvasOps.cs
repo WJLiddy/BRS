@@ -69,7 +69,8 @@ public class CanvasOps : MonoBehaviour
 
     public void applyBrush(float old_x, float old_y, float targ_x, float targ_y, int brush_radius, float cy, float ma, float ye, float str)
     {
-        //Don't draw over !
+        // Don't draw over !
+        Dictionary<int,bool> pixels_already_drawn = new Dictionary<int,bool>();
 
         int delta_steps = 10;
         for (int s = 0; s != delta_steps; s++)
@@ -91,12 +92,22 @@ public class CanvasOps : MonoBehaviour
             {
                 for (int dy = -brush_radius; dy != brush_radius; dy++)
                 {
+
+
+
                     if ((((float)dx * (float)dx) + ((float)dy * (float)dy)) < ((float)brush_radius * (float)brush_radius))
                     {
                         //don't ask
                         int canvas_x = texture.width - (dx + (int)(y * 400F));
                         int canvas_y = texture.height - (dy + (int)(x * 400F));
-                        if (canvas_x < 0 || canvas_y < 0 || canvas_x >= texture.width || canvas_y >= texture.height)
+
+                        // don't doubledraw pixels in path
+                        if (pixels_already_drawn.ContainsKey((canvas_x) * 10000 + canvas_y))
+                            continue;
+                        else
+                            pixels_already_drawn.Add((canvas_x) * 10000 + canvas_y,true);
+
+                            if (canvas_x < 0 || canvas_y < 0 || canvas_x >= texture.width || canvas_y >= texture.height)
                             continue;
                         float new_paint_ratio = (str) / (1F + wetness[canvas_x, canvas_y]);
                         cmy[canvas_x, canvas_y, 0] = (new_paint_ratio * cy) + ((1F - new_paint_ratio)*cmy[canvas_x, canvas_y, 0]);

@@ -30,7 +30,7 @@ public class Brush : MonoBehaviour {
 
         if (Input.GetMouseButton(0) && paint_start && changeamt > 0.01)
             //we need substantial movment 
-            cs.applyBrush(old_x,old_y,x_send, y_send, 10, 0, 1.0F, 0.0F, 0.5F);
+            cs.applyBrush(old_x,old_y,x_send, y_send, 10, 0, 1.0F, 0.0F, 0.2F);
 
         paint_start = Input.GetMouseButton(0);
         old_x = x_send;
