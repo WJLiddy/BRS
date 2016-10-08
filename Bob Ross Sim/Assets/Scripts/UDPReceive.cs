@@ -118,7 +118,7 @@ public class UDPReceive : MonoBehaviour
 
                 is_painting[id] = BitConverter.ToInt32(data, colindex + (3 * 4));
 
-                Debug.Log("From" + id+ "X " + pos[id, 0] + " Y " + pos[id, 1]+ "C " + col[id, 0] + " M " + col[id, 1] + " Y " + col[id, 2] + "Pnt? " + is_painting[id]);
+               // Debug.Log("From" + id+ "X " + pos[id, 0] + " Y " + pos[id, 1]+ "C " + col[id, 0] + " M " + col[id, 1] + " Y " + col[id, 2] + "Pnt? " + is_painting[id]);
 
             }
             catch (Exception err)

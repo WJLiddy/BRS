@@ -67,24 +67,20 @@ public class CanvasOps : MonoBehaviour
         return tex;
     }
 
+    //from 0..1   //Debug.Log(canvas_x + "," + canvas_y);
     public void applyBrush(float old_x, float old_y, float targ_x, float targ_y, int brush_radius, float cy, float ma, float ye, float str)
     {
         // Don't draw over !
         Dictionary<int,bool> pixels_already_drawn = new Dictionary<int,bool>();
 
-        int delta_steps = 10;
-        for (int s = 0; s != delta_steps; s++)
-        { 
-           float x = old_x + ((targ_x - old_x) * ((float)s / delta_steps));
-           float y = old_y + ((targ_y - old_y) * ((float)s / delta_steps));
+         int delta_steps = 10;
+         for (int s = 0; s != delta_steps; s++)
+         { 
+
+            float x = old_x + ((targ_x - old_x) * ((float)s / (float)delta_steps));
+            float y = old_y + ((targ_y - old_y) * ((float)s /(float) delta_steps));
             
-            // Transform on Y axis
-            y = -y;
-            //change x to reference top right corner
-            x = x + 1.5F;
-            y = y + 2.0F;
-            //scale x, y from 0.3 to 0.4: MULTIPLY BY 100
-            if (x < 0.0 || y < 0.0 || x >= 3 || y >= 4)
+            if (x < 0.0 || y < 0.0 || x >= 1F || y >= 1F)
                 return;
 
             //apply paint to these pixels
@@ -93,13 +89,13 @@ public class CanvasOps : MonoBehaviour
                 for (int dy = -brush_radius; dy != brush_radius; dy++)
                 {
 
-
-
                     if ((((float)dx * (float)dx) + ((float)dy * (float)dy)) < ((float)brush_radius * (float)brush_radius))
                     {
                         //don't ask
-                        int canvas_x = texture.width - (dx + (int)(y * 400F));
-                        int canvas_y = texture.height - (dy + (int)(x * 400F));
+                        int canvas_x = (dx + (int)((1-y) * 1600F));
+                        int canvas_y = (dy + (int)((1-x) * 1200F));
+
+                     
 
                         // don't doubledraw pixels in path
                         if (pixels_already_drawn.ContainsKey((canvas_x) * 10000 + canvas_y))

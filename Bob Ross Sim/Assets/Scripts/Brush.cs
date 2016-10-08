@@ -20,16 +20,19 @@ public class Brush : MonoBehaviour {
     {
 
         Vector3 oldpos = transform.position;
-        transform.position = new Vector3(oldpos.x + (0.1F*Input.GetAxis("Mouse X")), oldpos.y + (0.1F * Input.GetAxis("Mouse Y")), (Input.GetMouseButton(0) ? -7.0F : -7.2F) );
+        transform.position = new Vector3(oldpos.x + (0.1F*Input.GetAxis("Mouse X")), oldpos.y + (0.1F * Input.GetAxis("Mouse Y")), (Input.GetMouseButton(0) ? -6.4F : -6.7F) );
         GameObject canvas = GameObject.Find("Canvas"+brush_id);
+
         CanvasOps cs = canvas.GetComponent<CanvasOps>();
 
-        float x_send = transform.position.x - canvas.transform.position.x;
-        float y_send = transform.position.y - canvas.transform.position.y;
+        float x_send = ((transform.position.x +- canvas.transform.position.x + 1F)/2F);
+        float y_send = -((transform.position.y +- canvas.transform.position.y + 1F)/2F) + 1;
 
+        // Send X from 0..1
+        // Send Y from 0.. 1
         float changeamt = Mathf.Abs(old_x - x_send) + Mathf.Abs(old_y - y_send);
 
-        if (Input.GetMouseButton(0) && paint_start && changeamt > 0.01)
+        if (Input.GetMouseButton(0) && paint_start && changeamt > 0.04)
             //we need substantial movment 
             cs.applyBrush(old_x,old_y,x_send, y_send, 10, 0, 1.0F, 0.0F, 0.2F);
 
