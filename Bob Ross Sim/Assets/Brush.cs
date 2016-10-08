@@ -19,8 +19,8 @@ public class Brush : MonoBehaviour {
         GameObject canvas = GameObject.Find("Canvas");
         CanvasOps cs = canvas.GetComponent<CanvasOps>();
 
-        if (Input.GetMouseButton(0))
-           cs.applyBrush(transform.position.x - canvas.transform.position.x, transform.position.y -  canvas.transform.position.y);
+     //   if (Input.GetMouseButton(0))
+      //     cs.applyBrush(transform.position.x - canvas.transform.position.x, transform.position.y -  canvas.transform.position.y);
 
     }
 }
