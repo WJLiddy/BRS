@@ -8,6 +8,8 @@ public class Plane : MonoBehaviour {
     {
         movTexture = ((MovieTexture)GetComponent<Renderer>().material.mainTexture);
         movTexture.Play();
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.Play();
     }
 }
 
