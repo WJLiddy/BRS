@@ -25,21 +25,12 @@ public class UDPReceive : MonoBehaviour
 
     public int port; // define > init
 
+    bool dead = false;
+
     // start from unity3d
     public void Start()
     {
-
         init();
-    }
-
-    // OnGUI
-    void OnGUI()
-    {
-        Rect rectObj = new Rect(40, 10, 200, 400);
-        GUIStyle style = new GUIStyle();
-        style.alignment = TextAnchor.UpperLeft;
-        GUI.Box(rectObj, "On port: " + port + " #\n"
-                + "ID 0 X Y Z: " + pos[0,0] + " " + pos[0,1] + " " + pos[0,2] + " \n");
     }
 
     // init
@@ -61,7 +52,7 @@ public class UDPReceive : MonoBehaviour
     {
 
         client = new UdpClient(port);
-        while (true)
+        while (!dead)
         {
 
             try
@@ -118,5 +109,17 @@ public class UDPReceive : MonoBehaviour
                 print(err.ToString());
             }
         }
+    }
+
+    void OnApplicationQuit()
+    {
+        Debug.Log("CLOSING!");
+        dead = true;
+        Thread.Sleep(1000);
+        // udpclient object
+        client.Close();
+        // receiving Thread
+        receiveThread.Abort();
+
     }
 }
