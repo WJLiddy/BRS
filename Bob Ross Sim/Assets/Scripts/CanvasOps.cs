@@ -15,14 +15,7 @@ public class CanvasOps : MonoBehaviour
 
     void Update()
     {
-        for (int y = 0; y < texture.height; y++)
-        {
-            for (int x = 0; x < texture.width; x++)
-            {
-                if(r.NextDouble() < 0.0001)
-                    texture.SetPixel(x, y, new Color((float)r.NextDouble(), (float)r.NextDouble(), (float)r.NextDouble(), 0));
-            }
-        }
+
         texture.Apply();
     }
 
@@ -39,5 +32,27 @@ public class CanvasOps : MonoBehaviour
             tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
         }
         return tex;
+    }
+
+    public void applyBrush(float x, float y)
+    {
+        // Transform on Y axis
+        y = -y;
+        //change x to reference top right corner
+        x = x + 1.5F;
+        y = y + 2.0F;
+        //Debug.Log(x + "," + y);
+        //scale x, y from 0.3 to 0.4: MULTIPLY BY 100
+        if (x < 0.0 || y < 0.0 || x >= 3 || y >= 4)
+            return;
+        //(float)r.NextDouble()
+        for (int dx = -3; dx != 4; dx++)
+        {
+            for (int dy = -3; dy != 4; dy++)
+            {
+                texture.SetPixel(400 - (dx + (int)(y * 100F)), 300 - (dy + (int)(x * 100F)), new Color(1F, 0, 0, 0));
+            }        }
+
+
     }
 }
