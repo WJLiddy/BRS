@@ -4,6 +4,7 @@ using System.Collections;
 public class Brush : MonoBehaviour {
 
     bool paint_start = false;
+    public int brush_id;
     // Use this for initialization
     void Start()
     {
@@ -19,8 +20,8 @@ public class Brush : MonoBehaviour {
     {
 
         Vector3 oldpos = transform.position;
-        transform.position = new Vector3(oldpos.x + (0.1F*Input.GetAxis("Mouse X")), oldpos.y + (0.1F * Input.GetAxis("Mouse Y")), (Input.GetMouseButton(0) ? -7.0F : -7.5F) );
-        GameObject canvas = GameObject.Find("Canvas");
+        transform.position = new Vector3(oldpos.x + (0.1F*Input.GetAxis("Mouse X")), oldpos.y + (0.1F * Input.GetAxis("Mouse Y")), (Input.GetMouseButton(0) ? -7.0F : -7.2F) );
+        GameObject canvas = GameObject.Find("Canvas"+brush_id);
         CanvasOps cs = canvas.GetComponent<CanvasOps>();
 
         float x_send = transform.position.x - canvas.transform.position.x;

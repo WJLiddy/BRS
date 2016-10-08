@@ -45,7 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Brush.cs" />
+     <Compile Include="Assets\Scripts\Brush.cs" />
      <Compile Include="Assets\Scripts\CanvasOps.cs" />
      <Compile Include="Assets\Scripts\Plane.cs" />
      <Compile Include="Assets\Scripts\UDPReceive.cs" />
