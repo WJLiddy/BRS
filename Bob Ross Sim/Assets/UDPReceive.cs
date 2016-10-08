@@ -16,27 +16,15 @@ public class UDPReceive : MonoBehaviour
     // udpclient object
     UdpClient client;
 
+    // X Y Z P R Y
+    double[,] pos = new double[4,6];
+
+    // R G B
+    int[,] col = new int[4, 3];
+
 
     public int port; // define > init
 
-    // infos
-    public string lastReceivedUDPPacket = "";
-    public string allReceivedUDPPackets = ""; // clean up this from time to time!
-
-
-    // start from shell
-    private static void Main()
-    {
-        UDPReceive receiveObj = new UDPReceive();
-        receiveObj.init();
-
-        string text = "";
-        do
-        {
-            text = Console.ReadLine();
-        }
-        while (!text.Equals("exit"));
-    }
     // start from unity3d
     public void Start()
     {
@@ -50,21 +38,15 @@ public class UDPReceive : MonoBehaviour
         Rect rectObj = new Rect(40, 10, 200, 400);
         GUIStyle style = new GUIStyle();
         style.alignment = TextAnchor.UpperLeft;
-        GUI.Box(rectObj, "# UDPReceive\n " + port + " #\n"
-                + "shell> : " + port + " \n"
-                + "\nLast Packet: \n" + lastReceivedUDPPacket
-                + "\n\nAll Messages: \n" + allReceivedUDPPackets
-                , style);
+        GUI.Box(rectObj, "On port: " + port + " #\n"
+                + "ID 0 X Y Z: " + pos[0,0], " " + pos[0,1] + pos[0,2] + " \n");
     }
 
     // init
     private void init()
     {
-        // Endpunkt definieren, von dem die Nachrichten gesendet werden.
-        print("UDPSend.init()");
-
         // define port
-        port = 8051;
+        port = 13370;
 
         // status
         receiveThread = new Thread(
@@ -88,18 +70,21 @@ public class UDPReceive : MonoBehaviour
                 IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
                 byte[] data = client.Receive(ref anyIP);
 
-                // Bytes mit der UTF8-Kodierung in das Textformat kodieren.
-                string text = Encoding.UTF8.GetString(data);
+                // ID
+                int posindex = 4;
+                int id = BitConverter.ToInt32(data, 0);
+                for(int i = 0; i != 8; i++)
+                {
+                    //update position vector
+                    pos[id,i] = BitConverter.ToDouble(data, posindex + (i*8));
+                }
 
-                // Den abgerufenen Text anzeigen.
-                print(">> " + text);
+                int colindex = (4 + 64);
 
-                // latest UDPpacket
-                lastReceivedUDPPacket = text;
-
-                // ....
-                allReceivedUDPPackets = allReceivedUDPPackets + text;
-
+                for (int i = 0; i != 3; i++)
+                {
+                    col[id, i] = BitConverter.ToInt32(data, colindex + i*4);
+                }
             }
             catch (Exception err)
             {
