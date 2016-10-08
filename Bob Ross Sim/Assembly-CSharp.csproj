@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CanvasOps.cs" />
      <Compile Include="Assets\Plane.cs" />
      <Compile Include="Assets\UDPReceive.cs" />
  <Reference Include="UnityEngine.UI">
