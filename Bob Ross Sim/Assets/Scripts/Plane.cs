@@ -4,7 +4,8 @@ using System.Collections;
 public class Plane : MonoBehaviour {
 
     public MovieTexture movTexture;
-    double endgame_timer;
+    double endgame_timer = 0;
+    int[,] score_ratings = new int[4,5];
 
     void Start()
     {
@@ -18,6 +19,8 @@ public class Plane : MonoBehaviour {
     {
         if (!movTexture.isPlaying)
         {
+    
+
 
         }
     }
