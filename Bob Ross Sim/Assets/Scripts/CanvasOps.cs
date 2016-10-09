@@ -10,6 +10,7 @@ public class CanvasOps : MonoBehaviour
     float[,] wetness = new float[1600, 1200];
     LinkedList<int[]> new_paint;
     System.Random r;
+    int y_dry = 0;
 
     void Start()
     {
@@ -39,19 +40,17 @@ public class CanvasOps : MonoBehaviour
     {
         for (int x = 0; x != texture.width; x++)
         {
-            for (int y = 0; y != texture.height; y++)
+            if (wetness[x,y_dry] > 0.01)
             {
-                if (wetness[x,y] > 0.01)
-                {
                     // 100 seconds to dry.
-                    wetness[x,y] = wetness[x,y] - (float)(Time.deltaTime * 0.01);
-                }
+                    wetness[x, y_dry] = wetness[x, y_dry] - 0.02f;
 
             }
         }
+        y_dry = ((y_dry + 1) % texture.height);
                 //convert cmy to rgb
                 //apply paint to these pixels
-                foreach (int[] element in new_paint)
+        foreach (int[] element in new_paint)
         {
             int x = element[0];
             int y = element[1];
