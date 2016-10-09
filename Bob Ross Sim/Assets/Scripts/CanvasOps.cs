@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CanvasOps : MonoBehaviour
 {
-    Texture2D texture;
+    public Texture2D texture;
     // cmds
     float[,,] cmy = new float[1600, 1200, 3];
     float[,] wetness = new float[1600, 1200];
@@ -15,6 +15,7 @@ public class CanvasOps : MonoBehaviour
     static int next_turn_order = 0;
     static int waitstep = 2;
     int draw_turn;
+   
 
     void Start()
     {
