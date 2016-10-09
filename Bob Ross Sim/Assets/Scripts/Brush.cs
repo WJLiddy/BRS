@@ -101,23 +101,20 @@ public class Brush : MonoBehaviour {
 
        
 
-        //??? CHANGEAMY DOESNT WORK HERE
+        //This code is SHITTY
         if ((c_targ != brush_id) && (is_painting == 1) && (paint_start))
         {
-            Debug.Log("EXECUTE");
             // WE ARE BEING eVIL!
             evil++;
 
             // NEW POS UPDATE
             // UGLY but it'll go.
-            Vector3 d = new Vector3(newX(c_targ) + -(1.5f * x), newY(c_targ) + (1.5f * y), (is_painting == 1) ? -6.2F : -6.5F);
+            Vector3 d = new Vector3(newX(c_targ) + (orig_x - newX(c_targ))  + -(1.5f * x), +(orig_y - newY(c_targ)) +  newY(c_targ) + (1.5f * y), (is_painting == 1) ? -6.2F : -6.5F);
 
-            float x_send_e = ((d.x + -GameObject.Find("Canvas" + c_targ).GetComponent<CanvasOps>().transform.position.x + 1F) / 2F);
-            float y_send_e = -((d.y + -GameObject.Find("Canvas" + c_targ).GetComponent<CanvasOps>().transform.position.y + 1F) / 2F) + 1;
-
-
-
-            GameObject.Find("Canvas" + c_targ).GetComponent<CanvasOps>().applyBrush(x_send_e, y_send_e, x_send_e+0.1f, y_send_e+0.1f, 15, cy, ye, ma, 0.2F);
+            float x_send_e = ((d.x + -GameObject.Find("Canvas" + c_targ).transform.position.x + 1F) / 2F);
+            float y_send_e = -((d.y + -GameObject.Find("Canvas" + c_targ).transform.position.y + 1F) / 2F) + 1;
+            
+            GameObject.Find("Canvas" + c_targ).GetComponent<CanvasOps>().applyBrush(x_send_e, y_send_e, x_send_e, y_send_e, 15, cy, ye, ma, 0.2F);
 
         } else if ((is_painting == 1) && paint_start && changeamt > 0.002)
         {

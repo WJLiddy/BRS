@@ -165,11 +165,11 @@ public class Plane : MonoBehaviour {
                         //sort by passion
                         int p = GameObject.Find("Brush" + i).GetComponent<Brush>().passion;
                         Debug.Log(i + "ID HAS PASSION " + p);
-                        if (p < 50)
+                        if (p < 1000)
                             score = 2;
-                        else if (p < 100)
+                        else if (p < 2000)
                             score = 3;
-                        else if (p < 150)
+                        else if (p < 3000)
                             score = 4;
                         else
                             score = 5;
@@ -181,7 +181,14 @@ public class Plane : MonoBehaviour {
                         int p = GameObject.Find("Brush" + i).GetComponent<Brush>().evil;
                         Debug.Log(i + "ID HAS EVIL " + p);
                         //TEMP!
-                        score = 1;
+                        if (p > 1500)
+                            score = 2;
+                        else if (p > 700)
+                            score = 3;
+                        else if (p > 200)
+                            score = 4;
+                        else
+                            score = 5;
                     }
 
 
