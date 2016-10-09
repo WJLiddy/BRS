@@ -70,7 +70,7 @@ public class Brush : MonoBehaviour {
 
         if ((is_painting == 1) && paint_start && changeamt > 0.001)
             //we need substantial movment 
-            cs.applyBrush(old_x,old_y,x_send, y_send, 10, cy, ye, ma, 1F);
+            cs.applyBrush(old_x,old_y,x_send, y_send, 15, cy, ye, ma, 0.5F);
 
         paint_start = (is_painting == 1);
         old_x = x_send;

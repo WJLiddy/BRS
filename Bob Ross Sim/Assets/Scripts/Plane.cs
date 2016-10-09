@@ -26,17 +26,18 @@ public class Plane : MonoBehaviour {
 
     void Update()
     {
-        endgame_timer += 1;
-        //
-        if (!movTexture.isPlaying && endgame_timer < 800)
+
+        if (Time.fixedTime > ((4 * 60) + 45))
         {
 
+            
             if (ratings_ready)
             {
-                t0.text = get_msg(0, (int)(endgame_timer / 100.0));
-                t1.text = get_msg(1, (int)(endgame_timer / 100.0));
-                t2.text = get_msg(2, (int)(endgame_timer / 100.0));
-                t3.text = get_msg(3, (int)(endgame_timer / 100.0));
+                int t = (int)((Time.fixedTime - ((4 * 60) + 45)) / 4.0);
+                t0.text = get_msg(0, t);
+                t1.text = get_msg(1, t);
+                t2.text = get_msg(2, t);
+                t3.text = get_msg(3, t);
             } else
             {
                 ratings_ready = true;
