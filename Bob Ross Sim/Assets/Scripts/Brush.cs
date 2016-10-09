@@ -90,7 +90,7 @@ public class Brush : MonoBehaviour {
         {
             // WE ARE BEING eVIL!
             evil++;
-            cs.applyBrush(old_x, old_y, x_send, y_send, 15, cy, ye, ma, 0.2F);
+            GameObject.Find("Canvas" + c_targ).GetComponent<CanvasOps>().applyBrush(old_x, old_y, x_send, y_send, 15, cy, ye, ma, 0.2F);
 
         } else if ((is_painting == 1) && paint_start && changeamt > 0.001)
         {

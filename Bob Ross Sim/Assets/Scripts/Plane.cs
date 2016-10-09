@@ -127,11 +127,11 @@ public class Plane : MonoBehaviour {
                         int serr = StructError(ross, player, 3, 0.01f);
                         Debug.Log(i + " SCORED " + serr + "IN SERR");
 
-                        if (serr < 200)
+                        if (serr < 325)
                             score = 5;
-                        else if (serr < 300)
+                        else if (serr < 375)
                             score = 4;
-                        else if (serr < 400)
+                        else if (serr < 450)
                             score = 3;
                         else
                             score = 2;
@@ -141,9 +141,9 @@ public class Plane : MonoBehaviour {
                     {
                         float ddef = DeviDiff(ross, player);
                         Debug.Log(i + " SCORED " +ddef + "IN DDEF");
-                        if (ddef < 0.5)
+                        if (ddef < 0.3)
                             score = 5;
-                        else if (ddef < 0.6)
+                        else if (ddef < 0.5)
                             score = 4;
                         else if (ddef < 0.7)
                             score = 3;
@@ -155,21 +155,27 @@ public class Plane : MonoBehaviour {
                 else
                 {
                     //the other 3 scores are random!
-                    if(s == 3)
+                    if(s == 2)
                     {
                         score = UnityEngine.Random.Range(2, 6);
                     }
 
-                    if (s == 4)
+                    if (s == 3)
                     {
                         //sort by passion
                         int p = GameObject.Find("Brush" + i).GetComponent<Brush>().passion;
                         Debug.Log(i + "ID HAS PASSION " + p);
-                        //TEMP!
-                        score = 1;
+                        if (p < 50)
+                            score = 2;
+                        else if (p < 100)
+                            score = 3;
+                        else if (p < 150)
+                            score = 4;
+                        else
+                            score = 5;
                     }
 
-                    if (s == 5)
+                    if (s == 4)
                     {
                         //sort by passion
                         int p = GameObject.Find("Brush" + i).GetComponent<Brush>().evil;
