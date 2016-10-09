@@ -10,8 +10,7 @@ public class Brush : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
-        Screen.lockCursor = true;
+        
         switch(brush_id)
         {
             case 0:
@@ -55,7 +54,7 @@ public class Brush : MonoBehaviour {
         Vector3 oldpos = transform.position;
         //mouse
         //transform.position = new Vector3(oldpos.x + (0.1F*Input.GetAxis("Mouse X")), oldpos.y + (0.1F * Input.GetAxis("Mouse Y")), (Input.GetMouseButton(0) ? -6.4F : -6.7F) );
-        transform.position = new Vector3(orig_x + -(x), orig_y + (y), (is_painting == 1) ? -6.4F : -6.7F);
+        transform.position = new Vector3(orig_x + -(1.5f * x), orig_y + (1.5f * y), (is_painting == 1) ? -6.4F : -6.7F);
 
 
         GameObject canvas = GameObject.Find("Canvas"+brush_id);
