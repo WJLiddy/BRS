@@ -29,15 +29,14 @@ public class Plane : MonoBehaviour {
     void Update()
     {
 
-        //if (Time.fixedTime > ((5 * 60) + 45))
-            if (Time.fixedTime > (30))
+        if (Time.fixedTime > ((5 * 60) + 45))
             {
 
             
             if (ratings_ready)
             {
                 //  int t = (int)((Time.fixedTime - ((5 * 60) + 45)) / 4.0);
-                int t = (int)((Time.fixedTime - 30) / 4.0);
+                int t = (int)((Time.fixedTime - ((5 * 60) + 45)) / 4.0);
                 t0.text = get_msg(0, t);
                 t1.text = get_msg(1, t);
                 t2.text = get_msg(2, t);
