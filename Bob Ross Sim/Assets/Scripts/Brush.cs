@@ -55,7 +55,7 @@ public class Brush : MonoBehaviour {
         Vector3 oldpos = transform.position;
         //mouse
         //transform.position = new Vector3(oldpos.x + (0.1F*Input.GetAxis("Mouse X")), oldpos.y + (0.1F * Input.GetAxis("Mouse Y")), (Input.GetMouseButton(0) ? -6.4F : -6.7F) );
-        transform.position = new Vector3(orig_x + -(1.5f * x), orig_y + (1.5f * y), (is_painting == 1) ? -6.2F : -6.5F);
+        transform.position = new Vector3(orig_x + -(1.5f * x), orig_y + (1.5f * y), (is_painting == 1) ? -6.3F : -6.5F);
 
 
         GameObject canvas = GameObject.Find("Canvas"+brush_id);
@@ -114,13 +114,13 @@ public class Brush : MonoBehaviour {
             float x_send_e = ((d.x + -GameObject.Find("Canvas" + c_targ).transform.position.x + 1F) / 2F);
             float y_send_e = -((d.y + -GameObject.Find("Canvas" + c_targ).transform.position.y + 1F) / 2F) + 1;
             
-            GameObject.Find("Canvas" + c_targ).GetComponent<CanvasOps>().applyBrush(x_send_e, y_send_e, x_send_e, y_send_e, 15, cy, ye, ma, 0.2F);
+            GameObject.Find("Canvas" + c_targ).GetComponent<CanvasOps>().applyBrush(x_send_e, y_send_e, x_send_e, y_send_e, 20, cy, ye, ma, 0.2F);
 
         } else if ((is_painting == 1) && paint_start && changeamt > 0.002)
         {
             //we are writing on our own, so add passion
             passion++;
-            cs.applyBrush(old_x, old_y, x_send, y_send, 15, cy, ye, ma, 0.2F);
+            cs.applyBrush(old_x, old_y, x_send, y_send, 20, cy, ye, ma, 0.2F);
         }
 
         paint_start = (is_painting == 1);
