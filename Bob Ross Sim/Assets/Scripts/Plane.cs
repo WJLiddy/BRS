@@ -156,8 +156,30 @@ public class Plane : MonoBehaviour {
                 else
                 {
                     //the other 3 scores are random!
+                    if(s == 3)
+                    {
+                        score = UnityEngine.Random.Range(2, 6);
+                    }
 
-                    score = UnityEngine.Random.Range(2, 6);
+                    if (s == 4)
+                    {
+                        //sort by passion
+                        int p = GameObject.Find("Brush" + i).GetComponent<Brush>().passion;
+                        Debug.Log(i + "ID HAS PASSION " + p);
+                        //TEMP!
+                        score = 1;
+                    }
+
+                    if (s == 5)
+                    {
+                        //sort by passion
+                        int p = GameObject.Find("Brush" + i).GetComponent<Brush>().evil;
+                        Debug.Log(i + "ID HAS EVIL " + p);
+                        //TEMP!
+                        score = 1;
+                    }
+
+
                 }
 
                 score_ratings[i, s] = score;

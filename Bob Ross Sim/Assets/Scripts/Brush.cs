@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Brush : MonoBehaviour {
 
@@ -7,6 +6,8 @@ public class Brush : MonoBehaviour {
     float orig_x;
     float orig_y;
     public int brush_id;
+    public int passion = 0;
+    public int evil = 0;
     // Use this for initialization
     void Start()
     {
@@ -64,13 +65,39 @@ public class Brush : MonoBehaviour {
         float x_send = ((transform.position.x +- canvas.transform.position.x + 1F)/2F);
         float y_send = -((transform.position.y +- canvas.transform.position.y + 1F)/2F) + 1;
 
+        /**
+         *     public int passion = 0;
+    public int friendship = 0;
+         * 
+         * */
+
+        int c_targ = 0;
+        // Ok, here , we look up drawing on other people's images
+        if (transform.position.x > 1.5 && transform.position.y < 5)
+            c_targ = 4;
+        else if (transform.position.x < 1.5 && transform.position.y < 5)
+            c_targ = 3;
+        else if (transform.position.x > 1.5 && transform.position.y > 5)
+            c_targ = 1;
+        else if (transform.position.x < 1.5 && transform.position.y > 5)
+            c_targ = 2;
+
         // Send X from 0..1
         // Send Y from 0.. 1
         float changeamt = Mathf.Abs(old_x - x_send) + Mathf.Abs(old_y - y_send);
 
-        if ((is_painting == 1) && paint_start && changeamt > 0.001)
-            //we need substantial movment 
-            cs.applyBrush(old_x,old_y,x_send, y_send, 15, cy, ye, ma, 0.5F);
+        if (c_targ != brush_id && ((is_painting == 1) && paint_start && changeamt > 0.001))
+        {
+            // WE ARE BEING eVIL!
+            evil++;
+            cs.applyBrush(old_x, old_y, x_send, y_send, 15, cy, ye, ma, 0.2F);
+
+        } else if ((is_painting == 1) && paint_start && changeamt > 0.001)
+        {
+            //we are writing on our own, so add passion
+            passion++;
+            cs.applyBrush(old_x, old_y, x_send, y_send, 15, cy, ye, ma, 0.2F);
+        }
 
         paint_start = (is_painting == 1);
         old_x = x_send;
