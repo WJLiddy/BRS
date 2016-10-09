@@ -11,9 +11,16 @@ public class CanvasOps : MonoBehaviour
     LinkedList<int[]> new_paint;
     System.Random r;
     int y_dry = 0;
+    static int draw_ctr;
+    static int next_turn_order = 0;
+    static int waitstep = 2;
+    int draw_turn;
 
     void Start()
     {
+        draw_turn = next_turn_order;
+        next_turn_order = next_turn_order + waitstep;
+
         new_paint = new LinkedList<int[]>();
         texture = LoadPNG(Application.dataPath + "/misc_materials/base.png");
         //convert texture to cmy completely dry.
@@ -38,16 +45,20 @@ public class CanvasOps : MonoBehaviour
 
     void Update()
     {
-        for (int x = 0; x != texture.width; x++)
-        {
-            if (wetness[x,y_dry] > 0.01)
+       for (int x = 0; x != texture.width; x++)
+       {
+            for (int y = y_dry; y != y_dry + 5; y++)
             {
-                    // 100 seconds to dry.
-                    wetness[x, y_dry] = wetness[x, y_dry] - 0.02f;
-
+                if (wetness[x, y] > 0.1)
+                {
+                    // Hits every line every 10 seconds
+                    wetness[x, y_dry] = wetness[x, y_dry] - 0.1f;
+                }
             }
+
         }
-        y_dry = ((y_dry + 1) % texture.height);
+       y_dry = ((y_dry + 5) % texture.height);
+
                 //convert cmy to rgb
                 //apply paint to these pixels
         foreach (int[] element in new_paint)
@@ -60,7 +71,20 @@ public class CanvasOps : MonoBehaviour
             texture.SetPixel(x,y, new Color(r, g, b, 0));
         }
         new_paint = new LinkedList<int[]>();
-        texture.Apply();
+
+        // If my ID is zero, I may update the drawstate.
+        if (draw_ctr == 0)
+        {
+            draw_turn++;
+            //HARDCODE!
+            draw_turn = (draw_turn % 8);
+        }
+
+        // Draw on my turn
+        if(draw_turn == draw_ctr)
+        {
+            texture.Apply();
+        }
     }
 
     public static Texture2D LoadPNG(string filePath)
